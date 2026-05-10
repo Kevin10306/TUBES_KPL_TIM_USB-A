@@ -1,40 +1,74 @@
-# Jatai-dan-kepin-coba
+# ✂️ Cukurin - Barber Queue Management System
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+**Cukurin** adalah aplikasi berbasis web yang dirancang untuk memudahkan pelanggan mengambil nomor antrean barbershop secara _online_. Pelanggan tidak perlu lagi membuang waktu menunggu di lokasi, cukup daftar dari mana saja, dan pantau status antrean secara _real-time_.
 
-## Getting Started
+> **Tugas Besar Konstruksi Perangkat Lunak (KPL)**  
+> Proyek ini dibangun untuk memenuhi spesifikasi Tugas Besar CLO2, dengan menerapkan praktik rekayasa perangkat lunak yang kokoh.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## 🚀 Fitur Utama
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Booking Antrean Online:** Mengambil nomor antrean dengan validasi ketersediaan secara langsung.
+- **Real-time Queue Status (Automata):** Melacak status antrean pengguna dari `Menunggu` ➔ `Sedang Cukur` ➔ `Selesai`.
+- **Daftar Barbershop Terdekat:** Menampilkan barbershop yang tersedia beserta estimasi jarak dan harga (menggunakan konsep _Table-Driven_).
+- **Dashboard Personal:** Tampilan antarmuka khusus pelanggan untuk memanajemen profil dan antrean aktif.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+---
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 🛠️ Teknik Konstruksi Perangkat Lunak
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Proyek ini tidak hanya berfokus pada UI/UX, tetapi juga menerapkan pilar-pilar penting dalam _Software Construction_:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. **Defensive Programming / Design by Contract (DbC):**
+   - Diterapkan secara ketat pada fitur _Booking Antrean_. Sistem memastikan validasi input pengguna (_Pre-condition_) dan menjamin kuota antrean serta _state_ antrean (_Post-condition_) tertangani dengan baik dan tidak menimbulkan _fatal error_.
+2. **Automata (State Machine):**
+   - Mengatur siklus hidup (lifecycle) dari sebuah antrean pengguna agar tidak terjadi loncatan status yang tidak logis.
+3. **Unit Testing:**
+   - Menyediakan pengujian otomatis (menggunakan _Jest / React Testing Library_) untuk memvalidasi logika pemesanan antrean dan _state management_.
+4. **Code Reuse / Library:**
+   - Membangun antarmuka dengan komponen-komponen React yang sangat _reusable_ (seperti `Navbar`, `Card`, `Hero`, `Button`).
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 💻 Teknologi yang Digunakan
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Framework:** Next.js & React
+- **Bahasa:** TypeScript (memanfaatkan _Parameterization / Generics_ untuk keamanan tipe data).
+- **Styling:** Vanilla CSS dengan pendekatan CSS Modules & Flexbox/Grid modern (Desain bernuansa _Premium Glassmorphism_).
+- **Version Control:** Git & GitHub
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## ⚙️ Cara Menjalankan Aplikasi Lokal
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Pastikan komputermu sudah terinstall **Node.js** dan **npm/yarn/pnpm**.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Kloning repository ini:
+   ```bash
+   git clone https://github.com/Kevin10306/Jatai-dan-kepin-coba.git
+   ```
+2. Masuk ke dalam folder proyek:
+   ```bash
+   cd barber-app
+   ```
+3. Install semua _dependencies_:
+   ```bash
+   npm install
+   ```
+4. Jalankan server lokal untuk mode pengembangan (development):
+   ```bash
+   npm run dev
+   ```
+5. Buka [http://localhost:3000](http://localhost:3000) di browser favoritmu untuk melihat hasilnya.
+
+---
+
+## 👥 Tim Pengembang
+
+Aplikasi ini dibangun dengan kolaborasi oleh tim:
+
+- **Jati**
+- **Kevin Ferdinand**
+
+_(Dibuat dengan semangat Vibe Coder 🔥)_

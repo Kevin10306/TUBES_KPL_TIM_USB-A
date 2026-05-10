@@ -46,93 +46,32 @@ a {
   text-decoration: none;
 }
 
-.hero {
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  min-height: 100vh;
-  gap: 20px;
-}
-
-.hero-description {
-  cursor: default;
-  text-align: left;
-  padding-right: 25vw;
-  font-family: Cormorant Garamond;
-  font-weight: 1000;
-  font-size: 3rem;
-  padding: 5px 10px;
-  color: var(--text-primary);
-  max-width: 600px;
-}
-
-.btn-primary {
-  position: flex;
-  bottom: 50px;
-  left: 200px;
-  padding: 13px 20px;
-  background-color: var(--accent-gold);
-  border: none;
-  border-radius: var(--radius-md);
-  font-size: 1.2rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  color: #ffffff;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.bg-content {
-  position: flex;
-  bottom: 50px;
-  left: 500px;
-  padding: 9px 20px;
-  border: 3px solid var(--accent-gold);
-  border-radius: var(--radius-md);
-  font-size: 1.2rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  color: var(--text-primary);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.btn-primary:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(245, 200, 66, 0.4);
-}
-
-.bg-content:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(245, 200, 66, 0.4);
-}
-
 .about {
   padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  min-height: 100vh;
-  gap: 20px;
-  background-color: #dad7d7;
+  min-height: 50vh;
+  gap: 0px;
+  /* background-color: #dad7d7; */
 }
 
 .about-title {
   align-self: center;
-  margin-bottom: 50px;
-  font-family: Poppins;
-  font-size: 5vw;
-  font-weight: 800;
-  letter-spacing: 5px;
-  background: var(--accent-gold);
-  width: fit-content;
-  padding: 5px 10px;
+  padding: 5px 15px;
   border-radius: 15px;
-  color: #fefefe;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  border: solid 2px var(--accent-gold);
+  margin-bottom: 20px;
+  margin-top: 20px;
+  transition: 0.2s ease-in-out;
+}
+
+.about-title:hover {
+  transform: scale(1.05);
+  cursor: default;
+  background-color: var(--accent-gold);
+  color: white;
 }
 
 .about-description {

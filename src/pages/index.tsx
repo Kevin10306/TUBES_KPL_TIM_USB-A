@@ -7,13 +7,13 @@ export default function Home() {
 
   return (
     <>
-    <title>Cukurin</title>
+    <title>Cukurin | Antrean cukur berbasis web </title>
     <div 
-    className="bg-layer">    
+    className="bg-layer">
     </div>
       <main>
         <Hero />
-
+        
         <section className="about">
           <h1 className="about-title">Tentang Cukurin</h1>
           <p className="about-description">Cukurin merupakan sebuah aplikasi web

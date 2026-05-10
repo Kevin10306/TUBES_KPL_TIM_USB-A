@@ -1,31 +1,75 @@
 .hero {
-  padding: 15px;
+  padding: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  gap: 40px;
+}
+
+.heroContent {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  min-height: 100vh;
-  gap: 20px;
+  gap: 30px;
 }
 
 .heroDescription {
   cursor: default;
   text-align: left;
-  padding-right: 25vw;
-  font-family: Cormorant Garamond;
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 1000;
-  font-size: 3rem;
-  padding: 5px 10px;
+  font-size: 3.5rem;
   color: var(--text-primary);
   max-width: 600px;
+  line-height: 1.2;
 }
 
+.heroActions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.heroImg {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.imageContainer {
+  position: flex;
+  height: 100%;
+  width: 30%;
+  padding: 0px 0px;
+  background-color: var(--bg-card);
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.heroImg img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  object-fit: cover;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.heroImg img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(245, 200, 66, 0.4);
+}
 
 .btnPrimary {
-  position: flex;
-  bottom: 50px;
-  left: 200px;
-  padding: 13px 20px;
+  padding: 15px 30px;
   background-color: var(--accent-gold);
   border: none;
   border-radius: var(--radius-md);
@@ -38,10 +82,7 @@
 }
 
 .bgContent {
-  position: flex;
-  bottom: 50px;
-  left: 500px;
-  padding: 9px 20px;
+  padding: 12px 30px;
   border: 3px solid var(--accent-gold);
   border-radius: var(--radius-md);
   font-size: 1.2rem;

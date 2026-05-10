@@ -1,10 +1,10 @@
 .manfaatPelanggan {
+    height: 50vh;
     width: 100%;
     margin: auto;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     margin-bottom: 20px;
-
 }
 
 .manfaatTitle {
@@ -13,7 +13,7 @@
     justify-content: center;
     padding: 5px 10px;
     margin: auto;
-    font-size: 5rem;
+    font-size: 3rem;
     font-weight: 800;
     letter-spacing: 5px;
     width: fit-content;
