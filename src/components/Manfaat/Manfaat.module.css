@@ -1,74 +1,86 @@
-.manfaatPelanggan {
-    height: 50vh;
+.manfaatPelanggan, .manfaatBarber {
+    min-height: 50vh;
     width: 100%;
     margin: auto;
-    padding: 10px;
+    padding: 2rem 1rem;
     text-align: center;
-    margin-bottom: 20px;
 }
 
 .manfaatTitle {
-    font-family: poppins;
-    align-items: center;
-    justify-content: center;
-    padding: 5px 10px;
-    margin: auto;
-    font-size: 3rem;
+    font-family: 'Outfit', sans-serif;
+    margin: 0 auto 2rem;
+    font-size: clamp(1.75rem, 5vw, 3rem);
     font-weight: 800;
-    letter-spacing: 5px;
+    letter-spacing: 2px;
     width: fit-content;
     color: var(--accent-gold);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .manfaatDescription {
-    font-family: cormorant garamond;
     display: flex;
     flex-wrap: wrap;
-    gap: 40px; 
-    align-items: center;
+    gap: 2rem; 
+    align-items: stretch;
     justify-content: center;
-    padding: 20px;
+    max-width: 1200px;
     margin: auto;
-    list-style: none; 
+    padding: 1rem;
 }
 
 .bgBox {
-  padding: 30px; 
-  position: relative;
-  width: 250px; 
-  height: 250px;
-  border-radius: 22px;
-  z-index: 1;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  transition: 0.5s;
-  justify-content: center;
-  background-color: #fefefe;
-  box-shadow: 10px 10px 30px #d9d9d9, -10px -10px 30px #ffffff;
+    padding: 2rem; 
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    min-height: 250px;
+    border-radius: 22px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    background-color: #fefefe;
+    box-shadow: 10px 10px 30px #d9d9d9, -10px -10px 30px #ffffff;
+    transition: all 0.3s ease;
 }
 
 .manfaatItem {
-  font-size: 1.2rem; 
-  font-weight: 600;
-  color: var(--text-primary);
-  text-align: center;
-  line-height: 1.5;
-}
-
-.bgBox:hover{
-  transform: translateY(-10px);
-  transform: scale(1.1);
-  box-shadow: 0 10px 20px rgba(245, 200, 66, 0.4);
-}
-
-.manfaatBarber {
-    width: 100%;
-    margin: auto;
-    padding: 20px;
+    font-size: 1.1rem; 
+    font-weight: 600;
+    color: var(--text-primary);
     text-align: center;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    line-height: 1.5;
 }
+
+.bgBox:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(245, 200, 66, 0.2);
+}
+
+@media (max-width: 768px) {
+    .manfaatTitle {
+        letter-spacing: 1px;
+    }
+    
+    .manfaatDescription {
+        gap: 1.5rem;
+    }
+    
+    .bgBox {
+        max-width: 280px;
+        min-height: 200px;
+        padding: 1.5rem;
+    }
+    
+    .manfaatItem {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .bgBox {
+        max-width: 100%;
+    }
+}
+

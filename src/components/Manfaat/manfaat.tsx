@@ -20,7 +20,7 @@ const Manfaat = () => {
             </div>
         </section>
 
-        <section className="manfaatBarber">
+        <section className={styles.manfaatBarber}>
           <h1 className={styles.manfaatTitle}>Untuk Barber & Barbershop</h1>
             <div className={styles.manfaatDescription}>
               <div className={styles.bgBox}>

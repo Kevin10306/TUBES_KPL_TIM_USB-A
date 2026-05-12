@@ -1,5 +1,4 @@
 import Manfaat from "@/components/Manfaat/manfaat";
-import {useRouter} from "next/router"
 import Hero from "@/components/Hero/hero";
 
 
