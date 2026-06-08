@@ -1,0 +1,564 @@
+.page {
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 2rem 2rem 3rem 280px;
+}
+
+.pageTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.steps {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.stepActive {
+  color: var(--accent-gold);
+}
+
+.stepDone {
+  color: #22c55e;
+}
+
+.stepDivider {
+  color: var(--text-secondary);
+  margin: 0 0.25rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2rem;
+  align-items: start;
+}
+
+.mainPanel {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.sidePanel {
+  background: white;
+  border-radius: 20px;
+  padding: 1.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  position: sticky;
+  top: 2rem;
+}
+
+.panelTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+}
+
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.calendarMonth {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.calendarNav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.calendarNavBtn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.calendarNavBtn:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.35rem;
+  margin-bottom: 2rem;
+}
+
+.dayLabel {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 0.4rem 0;
+}
+
+.dayCell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.dayCell:hover:not(.dayDisabled) {
+  background: rgba(245, 200, 66, 0.15);
+}
+
+.daySelected {
+  background: var(--accent-gold);
+  color: white;
+  font-weight: 700;
+}
+
+.dayDisabled {
+  color: #ccc;
+  cursor: default;
+}
+
+.dayOther {
+  color: #bbb;
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.serviceChip {
+  padding: 0.85rem 1rem;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.serviceChip:hover,
+.serviceChipActive {
+  border-color: var(--accent-gold);
+  background: rgba(245, 200, 66, 0.12);
+}
+
+.serviceChipName {
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.serviceChipPrice {
+  font-size: 0.8rem;
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.timeGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.timeChip {
+  padding: 0.55rem 1rem;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: white;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeChip:hover,
+.timeChipActive {
+  border-color: var(--accent-gold);
+  background: rgba(245, 200, 66, 0.15);
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.summaryRowTotal {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.85rem 0;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-primary);
+  border-top: 2px solid rgba(0, 0, 0, 0.08);
+  margin-top: 0.5rem;
+}
+
+.summaryDiscount {
+  color: #22c55e;
+}
+
+.confirmBtn {
+  width: 100%;
+  padding: 0.9rem;
+  background: var(--accent-gold);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1.25rem;
+  transition: all 0.2s ease;
+}
+
+.confirmBtn:hover {
+  background: var(--accent-orange);
+}
+
+.confirmBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Confirmation step */
+.barberCard {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(245, 200, 66, 0.08);
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.barberCardImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.barberCardName {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.barberCardLocation {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.barberCardRating {
+  color: var(--accent-gold);
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.detailSection {
+  margin-bottom: 1.5rem;
+}
+
+.detailLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.detailValue {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.extraList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.extraItem {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.extraItem input {
+  accent-color: var(--accent-gold);
+  width: 16px;
+  height: 16px;
+}
+
+.couponBox {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.couponInput {
+  flex: 1;
+  padding: 0.65rem 1rem;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.couponInput:focus {
+  border-color: var(--accent-gold);
+}
+
+.couponBtn {
+  padding: 0.65rem 1.25rem;
+  background: var(--accent-gold);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.couponSuccess {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.warningBox {
+  background: rgba(255, 107, 53, 0.08);
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: var(--accent-orange);
+  margin: 1rem 0;
+  line-height: 1.5;
+}
+
+.paySection {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.payLabel {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.payAmount {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.payBtn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--accent-gold);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.payBtn:hover {
+  background: var(--accent-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 200, 66, 0.35);
+}
+
+/* Invoice / Success */
+.successOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  padding: 2rem;
+}
+
+.successModal {
+  background: white;
+  border-radius: 24px;
+  padding: 2.5rem;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  animation: popIn 0.35s ease;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.successIcon {
+  font-size: 3.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.successTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.successSubtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.reminderBox {
+  background: rgba(245, 200, 66, 0.12);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.invoiceCard {
+  text-align: left;
+  background: #fafafa;
+  border-radius: 16px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.invoiceBarber {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.invoiceDate {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.invoiceService {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.invoiceSummary {
+  margin-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 0.75rem;
+}
+
+.successActions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.backBtn {
+  flex: 1;
+  padding: 0.85rem;
+  border: 2px solid var(--accent-gold);
+  background: white;
+  color: var(--text-primary);
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.backBtn:hover {
+  background: rgba(245, 200, 66, 0.1);
+}
+
+.downloadBtn {
+  flex: 1;
+  padding: 0.85rem;
+  background: var(--accent-gold);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.downloadBtn:hover {
+  background: var(--accent-orange);
+}
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--text-primary);
+  color: white;
+  padding: 0.85rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  z-index: 2000;
+  animation: popIn 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .page {
+    padding: 1.5rem 1rem 2rem 100px;
+  }
+}

@@ -5,11 +5,11 @@ import { useRouter } from 'next/router'
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const isDashboard = router.pathname === '/dashboard';
+  const hideNavbar = router.pathname.startsWith('/dashboard') || router.pathname.startsWith('/barber');
 
   return (
     <>
-      {!isDashboard && <Navbar />}
+      {!hideNavbar && <Navbar />}
       <Component {...pageProps} />
     </>
   )

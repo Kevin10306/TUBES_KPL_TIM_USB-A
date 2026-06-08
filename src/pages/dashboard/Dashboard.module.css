@@ -80,6 +80,13 @@
     font-weight: 600;
 }
 
+.scheduleService {
+    font-size: 0.8rem;
+    font-weight: 400 !important;
+    opacity: 0.85;
+    margin-top: 0.15rem;
+}
+
 .barberList {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
