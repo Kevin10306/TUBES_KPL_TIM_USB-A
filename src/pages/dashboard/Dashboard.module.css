@@ -2,7 +2,8 @@
     max-width: 1400px;
     margin: 0 auto;
     min-height: 100vh;
-    padding: 2rem 1.5rem 2rem 280px; /* Ditambah 280px untuk memberi ruang bagi sidebar */
+    padding: 2.5rem 2rem 3rem 280px;
+    animation: fadeInUp 0.5s ease forwards;
 }
 
 .header {
@@ -64,16 +65,33 @@
 .scheduleItem {
     background: var(--accent-gold);
     color: white;
-    padding: 0.75rem 1.25rem;
-    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-md);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
     min-width: 200px;
     flex: 1 1 300px;
     max-width: 400px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 6px 18px rgba(245, 200, 66, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.scheduleItem:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(245, 200, 66, 0.35);
+}
+
+.emptyState {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    padding: 0.5rem 0;
+}
+
+.errorState {
+    color: var(--accent-orange);
+    font-size: 0.95rem;
 }
 
 .scheduleItem p:first-child {
@@ -96,13 +114,15 @@
 
 .barberCard {
     background: white;
-    border-radius: 20px;
-    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInUp 0.5s ease forwards;
 }
 
 .barberCard:hover {
@@ -162,4 +182,4 @@
     .scheduleItem {
         flex: 1 1 100%;
     }
-}
+}

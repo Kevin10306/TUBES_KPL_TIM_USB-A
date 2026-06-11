@@ -2,7 +2,15 @@
   max-width: 1400px;
   margin: 0 auto;
   min-height: 100vh;
-  padding: 2rem 2rem 3rem 280px;
+  padding: 2.5rem 2rem 3rem 280px;
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.loadingText {
+  padding: 3rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  letter-spacing: 0.3px;
 }
 
 .pageTitle {
@@ -51,18 +59,21 @@
 
 .mainPanel {
   background: white;
-  border-radius: 20px;
-  padding: 2rem;
+  border-radius: var(--radius-md);
+  padding: 2.25rem;
   border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease;
 }
 
 .sidePanel {
-  background: white;
-  border-radius: 20px;
-  padding: 1.75rem;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
   position: sticky;
   top: 2rem;
 }
@@ -237,20 +248,24 @@
 
 .confirmBtn {
   width: 100%;
-  padding: 0.9rem;
+  padding: 1rem;
   background: var(--accent-gold);
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   font-weight: 700;
   font-size: 1rem;
+  letter-spacing: 0.3px;
   cursor: pointer;
-  margin-top: 1.25rem;
-  transition: all 0.2s ease;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 14px rgba(245, 200, 66, 0.3);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .confirmBtn:hover {
   background: var(--accent-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(245, 200, 66, 0.4);
 }
 
 .confirmBtn:disabled {
