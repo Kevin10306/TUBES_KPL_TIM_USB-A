@@ -8,8 +8,8 @@ const SideBar = () => {
 
     const menuItems = [
         { name: "Home", href: "/dashboard", active: router.pathname === "/dashboard" },
-        { name: "Detail Barber", href: "/barber/detail", active: router.pathname === "/barber/detail" },
-        { name: "Pemesanan", href: "/barber/booking", active: router.pathname === "/barber/booking" },
+        // { name: "Detail Barber", href: "/barber/detail", active: router.pathname === "/barber/detail" },
+        // { name: "Pemesanan", href: "/barber/booking", active: router.pathname === "/barber/booking" },
         { name: "Chat", href: "#", active: false },
         { name: "Profile", href: "#", active: false },
     ];

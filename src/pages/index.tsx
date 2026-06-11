@@ -74,17 +74,22 @@ export default function Home({ barbershops = [] }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const barbershops = await Barbershop.all();
+    const { data, error } = await supabaseClient
+      .from('barbershops')
+      .select('*');
+
+    if (error) throw error;
+
     return {
       props: {
-        barbershops: JSON.parse(JSON.stringify(barbershops ?? [])),
+        barbershop: data || [],
       },
     };
   } catch (error) {
     console.error(error);
     return {
       props: {
-        barbershops: [],
+        barbershop: [],
       },
     };
   }
