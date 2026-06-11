@@ -1,10 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import SideBar from "@/components/SideBar/sideBar";
-import { BARBER_DETAIL } from "@/data/mockBarber";
 import styles from "./detail.module.css";
 
 type Tab = "tentang" | "layanan" | "jadwal" | "review";
+
+type BarbershopDetail = {
+  id: string;
+  name: string;
+  location: string;
+  rating: number;
+  review_count: number;
+  status: string;
+  image: string;
+  about: string;
+  hours: { days: string; time: string }[];
+  team: { name: string; role: string; avatar: string }[];
+  services: { id: string; slug: string; name: string; price: number }[];
+  reviews: { name: string; rating: number; text: string }[];
+};
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "tentang", label: "Tentang" },
@@ -13,15 +27,35 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "review", label: "Review" },
 ];
 
+const TIME_SLOTS = ["08.00", "08.30", "09.00", "09.30", "10.00", "10.30"];
+
 export default function DetailBarber() {
   const router = useRouter();
+  const { id } = router.query;
+  const [barber, setBarber] = useState<BarbershopDetail | null>(null);
+  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<Tab>("tentang");
   const [expanded, setExpanded] = useState(false);
   const [favorite, setFavorite] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
   const [toast, setToast] = useState("");
 
-  const barber = BARBER_DETAIL;
+  useEffect(() => {
+    if (!id || typeof id !== "string") return;
+
+    const fetchDetail = async () => {
+      try {
+        const res = await fetch(`/api/barbershops?id=${id}`);
+        const json = await res.json();
+        if (res.ok) setBarber(json.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDetail();
+  }, [id]);
 
   const showToast = (msg: string) => {
     setToast(msg);
@@ -40,6 +74,28 @@ export default function DetailBarber() {
     showToast(messages[action]);
   };
 
+  if (loading) {
+    return (
+      <>
+        <SideBar />
+        <main className={styles.page}>
+          <p className={styles.loadingText}>Memuat detail barbershop...</p>
+        </main>
+      </>
+    );
+  }
+
+  if (!barber) {
+    return (
+      <>
+        <SideBar />
+        <main className={styles.page}>
+          <p className={styles.loadingText}>Barbershop tidak ditemukan.</p>
+        </main>
+      </>
+    );
+  }
+
   const shortAbout =
     barber.about.slice(0, 120) + (barber.about.length > 120 && !expanded ? "..." : "");
 
@@ -57,7 +113,7 @@ export default function DetailBarber() {
             <p className={styles.location}>{barber.location}</p>
             <div className={styles.rating}>
               <span>⭐ {barber.rating}</span>
-              <span>({barber.reviewCount})</span>
+              <span>({barber.review_count})</span>
             </div>
           </div>
 
@@ -97,7 +153,7 @@ export default function DetailBarber() {
             <>
               <p className={styles.aboutText}>
                 {expanded ? barber.about : shortAbout}
-                {!expanded && (
+                {!expanded && barber.about.length > 120 && (
                   <button className={styles.readMore} onClick={() => setExpanded(true)}>
                     {" "}Read more...
                   </button>
@@ -142,10 +198,16 @@ export default function DetailBarber() {
 
           {activeTab === "jadwal" && (
             <>
-              <p className={styles.scheduleDate}>{barber.schedule.date}</p>
+              <p className={styles.scheduleDate}>
+                {new Date().toLocaleDateString("id-ID", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </p>
               <h3 className={styles.sectionTitle}>Waktu</h3>
               <div className={styles.timeSlots}>
-                {barber.schedule.slots.map((slot) => (
+                {TIME_SLOTS.map((slot) => (
                   <button
                     key={slot}
                     className={`${styles.timeSlot} ${selectedSlot === slot ? styles.timeSlotActive : ""}`}
@@ -158,12 +220,12 @@ export default function DetailBarber() {
 
               <h3 className={styles.sectionTitle}>Barber Tersedia</h3>
               <div className={styles.barberScheduleList}>
-                {barber.schedule.barbers.map((b) => (
+                {barber.team.slice(0, 3).map((b) => (
                   <div key={b.name} className={styles.barberScheduleItem}>
                     <img src={b.avatar} alt={b.name} className={styles.barberScheduleAvatar} />
                     <div>
                       <p className={styles.barberScheduleName}>{b.name}</p>
-                      <p className={styles.barberScheduleService}>{b.service}</p>
+                      <p className={styles.barberScheduleService}>{b.role}</p>
                     </div>
                   </div>
                 ))}
@@ -173,8 +235,8 @@ export default function DetailBarber() {
 
           {activeTab === "review" && (
             <div className={styles.reviewList}>
-              {barber.reviews.map((review) => (
-                <div key={review.name} className={styles.reviewItem}>
+              {barber.reviews.map((review, i) => (
+                <div key={`${review.name}-${i}`} className={styles.reviewItem}>
                   <div className={styles.reviewHeader}>
                     <span className={styles.reviewName}>{review.name}</span>
                     <span className={styles.reviewRating}>({review.rating})</span>
@@ -189,7 +251,7 @@ export default function DetailBarber() {
         <div className={styles.footer}>
           <button
             className={styles.orderBtn}
-            onClick={() => router.push("/barber/booking")}
+            onClick={() => router.push(`/barber/booking?barbershopId=${barber.id}`)}
           >
             Pesan Sekarang
           </button>

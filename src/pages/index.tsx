@@ -2,18 +2,21 @@ import Manfaat from "@/components/Manfaat/manfaat";
 import Hero from "@/components/Hero/hero";
 import { GetServerSideProps } from "next";
 import { Barbershop } from "@/models/Barbershop";
+import styles from "@/styles/Home.module.css";
 
-type Props = {
-  barbershop: {
-    id: string;
-    namabarbershop: string;
-    deskripsi: string;
-    avatar: string;
-    rating: number;
-  }[];
+type BarbershopItem = {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  rating: number;
 };
 
-export default function Home({ barbershop  = [] }: Props) {
+type Props = {
+  barbershops: BarbershopItem[];
+};
+
+export default function Home({ barbershops = [] }: Props) {
   return (
     <>
       <title>Cukurin | Antrean cukur berbasis web</title>
@@ -35,17 +38,29 @@ export default function Home({ barbershop  = [] }: Props) {
 
         <Manfaat />
 
-        {/* Data barbershop */}
-        <section>
-          {barbershop.map((shop) => (
-            <div key={shop.id}>
-              <img src={shop.avatar} alt={shop.namabarbershop} width={50} />
-              <h2>{shop.namabarbershop}</h2>
-              <p>{shop.deskripsi}</p>
-              <p>Rating: {shop.rating}</p>
+        {barbershops.length > 0 && (
+          <section className={styles.barbershopSection}>
+            <h2 className={styles.sectionHeading}>Barbershop Mitra</h2>
+            <div className={styles.barbershopGrid}>
+              {barbershops.map((shop) => (
+                <article key={shop.id} className={styles.barbershopCard}>
+                  <img
+                    src={shop.image}
+                    alt={shop.name}
+                    className={styles.barbershopImage}
+                  />
+                  <div className={styles.barbershopInfo}>
+                    <h3>{shop.name}</h3>
+                    <p>{shop.description}</p>
+                    <span className={styles.barbershopRating}>
+                      ⭐ {shop.rating}
+                    </span>
+                  </div>
+                </article>
+              ))}
             </div>
-          ))}
-        </section>
+          </section>
+        )}
 
         <section className="footer-section">
           <div className="footer-description">
@@ -59,17 +74,22 @@ export default function Home({ barbershop  = [] }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const barbershops = await Barbershop.all();
+    const { data, error } = await supabaseClient
+      .from('barbershops')
+      .select('*');
+
+    if (error) throw error;
+
     return {
       props: {
-        barbershops: JSON.parse(JSON.stringify(barbershops ?? [])),
+        barbershop: data || [],
       },
     };
   } catch (error) {
     console.error(error);
     return {
       props: {
-        barbershops: [],
+        barbershop: [],
       },
     };
   }

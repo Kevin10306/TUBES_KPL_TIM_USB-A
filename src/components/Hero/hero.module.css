@@ -21,6 +21,8 @@
   max-width: 800px;
   margin-top: auto;
   margin-bottom: 10vh;
+  animation: fadeInUp 0.8s ease 0.2s forwards;
+  opacity: 0;
 }
 
 .heroImg {
@@ -41,8 +43,9 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.8) 100%
+    rgba(0, 0, 0, 0.15) 0%,
+    transparent 35%,
+    rgba(0, 0, 0, 0.75) 100%
   );
 }
 

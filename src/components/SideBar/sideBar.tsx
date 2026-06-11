@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { clearSessionUser } from "@/utils/authSession";
 import styles from "./SideBar.module.css";
 
 const SideBar = () => {
@@ -7,8 +8,8 @@ const SideBar = () => {
 
     const menuItems = [
         { name: "Home", href: "/dashboard", active: router.pathname === "/dashboard" },
-        { name: "Detail Barber", href: "/barber/detail", active: router.pathname === "/barber/detail" },
-        { name: "Pemesanan", href: "/barber/booking", active: router.pathname === "/barber/booking" },
+        // { name: "Detail Barber", href: "/barber/detail", active: router.pathname === "/barber/detail" },
+        // { name: "Pemesanan", href: "/barber/booking", active: router.pathname === "/barber/booking" },
         { name: "Chat", href: "#", active: false },
         { name: "Profile", href: "#", active: false },
     ];
@@ -33,7 +34,10 @@ const SideBar = () => {
                 <li>
                     <button
                         className={styles.menuItem}
-                        onClick={() => router.push("/auth/login")}
+                        onClick={() => {
+                            clearSessionUser();
+                            router.push("/auth/login");
+                        }}
                     >
                         Logout
                     </button>
