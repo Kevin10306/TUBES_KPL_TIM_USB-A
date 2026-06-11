@@ -1,11 +1,13 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { Barbershop } from "../../models/Barbershop";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { supabaseClient } from '../../lib/supabase';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  try {
-    const barbershops = await Barbershop.all();
-    res.status(200).json({ data: barbershops });
-  } catch (error) {
-    res.status(500).json({ error: "Gagal ambil data" });
+   const { data, error } = await supabaseClient
+    .from('barbershops')
+    .select('*');
+
+  if (error) {
+    return res.status(500).json(error);
   }
+  res.status(200).json({ barbershops: data });
 }

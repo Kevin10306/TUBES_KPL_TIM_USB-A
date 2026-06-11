@@ -1,14 +1,14 @@
 import Manfaat from "@/components/Manfaat/manfaat";
 import Hero from "@/components/Hero/hero";
 import { GetServerSideProps } from "next";
-import { Barbershop } from "@/models/Barbershop";
+import { supabaseClient } from "@/lib/supabase";
 
 type Props = {
   barbershop: {
     id: string;
-    namabarbershop: string;
-    deskripsi: string;
-    avatar: string;
+    name: string;
+    address: string;
+    image_url: string;
     rating: number;
   }[];
 };
@@ -39,9 +39,9 @@ export default function Home({ barbershop  = [] }: Props) {
         <section>
           {barbershop.map((shop) => (
             <div key={shop.id}>
-              <img src={shop.avatar} alt={shop.namabarbershop} width={50} />
-              <h2>{shop.namabarbershop}</h2>
-              <p>{shop.deskripsi}</p>
+              <img src={shop.image_url || "/placeholder-barber.jpg"} alt={shop.name} width={50} />
+              <h2>{shop.name}</h2>
+              <p>{shop.address}</p>
               <p>Rating: {shop.rating}</p>
             </div>
           ))}
@@ -59,17 +59,22 @@ export default function Home({ barbershop  = [] }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const barbershops = await Barbershop.all();
+    const { data, error } = await supabaseClient
+      .from('barbershops')
+      .select('*');
+
+    if (error) throw error;
+
     return {
       props: {
-        barbershops: JSON.parse(JSON.stringify(barbershops ?? [])),
+        barbershop: data || [],
       },
     };
   } catch (error) {
     console.error(error);
     return {
       props: {
-        barbershops: [],
+        barbershop: [],
       },
     };
   }

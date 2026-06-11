@@ -1,36 +1,28 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import SideBar from "@/components/SideBar/sideBar";
-import { getSavedSchedules, SavedSchedule } from "@/utils/scheduleStorage";
+import { supabaseClient } from "@/lib/supabase";
 import styles from "./Dashboard.module.css";
-
-type ApiSchedule = {
-    id: string;
-    barbershopName: string;
-    jadwal: string;
-};
 
 const Dashboard = () => {
     const router = useRouter();
     const [barbershops, setBarbershops] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string>("");
-    const [schedule, setSchedule] = useState<(ApiSchedule | SavedSchedule)[]>([]);
-
-    const loadSchedules = useCallback(() => {
-        const saved = getSavedSchedules();
-        setSchedule(saved);
-    }, []);
+    const [schedule, setSchedule] = useState<any[]>([]);
 
     useEffect(() => {
         const fetchBarbershops = async () => {
             try {
-                const response = await fetch("/api/barbershops");
-                if (!response.ok) {
-                    throw new Error("Gagal mengambil data");
+                const { data, error } = await supabaseClient
+                    .from('barbershops')
+                    .select('*');
+                
+                if (error) {
+                    throw error;
                 }
-                const data = await response.json();
-                setBarbershops(data.barbershops ?? data.data ?? []);
+                
+                setBarbershops(data || []);
             } catch (error) {
                 console.error("Error fetch data:", error);
                 setError("Data barbershop gagal dimuat");
@@ -42,30 +34,34 @@ const Dashboard = () => {
     }, []);
 
     useEffect(() => {
-        loadSchedules();
-
-        const fetchApiSchedule = async () => {
+        const fetchBookings = async () => {
             try {
-                const response = await fetch("/api/schedules");
-                if (!response.ok) return;
-                const data = await response.json();
-                const apiList: ApiSchedule[] = data.schedule ?? [];
-                const saved = getSavedSchedules();
-                setSchedule([...saved, ...apiList]);
-            } catch {
-                // tetap tampilkan jadwal dari localStorage
+                const { data, error } = await supabaseClient
+                    .from('bookings')
+                    .select(`
+                        id,
+                        booking_date,
+                        booking_time,
+                        services ( service_name ),
+                        barbers (
+                            barbershops ( name )
+                        )
+                    `);
+                
+                if (error) {
+                    throw error;
+                }
+                
+                setSchedule(data || []);
+            } catch (error) {
+                console.error("Error fetch data:", error);
+                setError("Data jadwal gagal dimuat");
+            } finally {
+                setLoading(false);
             }
         };
-        fetchApiSchedule();
-    }, [loadSchedules]);
-
-    useEffect(() => {
-        const handleRoute = () => {
-            if (router.pathname === "/dashboard") loadSchedules();
-        };
-        router.events.on("routeChangeComplete", handleRoute);
-        return () => router.events.off("routeChangeComplete", handleRoute);
-    }, [router, loadSchedules]);
+        fetchBookings();
+    }, []);
 
     return (
         <>
@@ -88,15 +84,15 @@ const Dashboard = () => {
                         {schedule.length === 0 ? (
                             <p>Tidak ada jadwal cukur</p>
                         ) : (
-                            schedule.map((jadwal) => (
+                            schedule.map((jadwal: any) => (
                                 <div key={jadwal.id} className={styles.scheduleItem}>
                                     <div>
-                                        <p>{jadwal.barbershopName}</p>
-                                        {"service" in jadwal && jadwal.service && (
-                                            <p className={styles.scheduleService}>{jadwal.service}</p>
+                                        <p>{jadwal.barbers?.barbershops?.name || 'Nama Barbershop'}</p>
+                                        {jadwal.services?.service_name && (
+                                            <p className={styles.scheduleService}>{jadwal.services.service_name}</p>
                                         )}
                                     </div>
-                                    <p>{jadwal.jadwal}</p>
+                                    <p>{jadwal.booking_date} - {jadwal.booking_time}</p>
                                 </div>
                             ))
                         )}
@@ -128,14 +124,14 @@ const Dashboard = () => {
                                 <article
                                     key={barbershop.id}
                                     className={styles.barberCard}
-                                    onClick={() => router.push("/barber/detail")}
+                                    onClick={() => router.push(`/barber/detail?id=${barbershop.id}`)}
                                     role="button"
                                     tabIndex={0}
-                                    onKeyDown={(e) => e.key === "Enter" && router.push("/barber/detail")}
+                                    onKeyDown={(e) => e.key === "Enter" && router.push(`/barber/detail?id=${barbershop.id}`)}
                                 >
 
                                     <img
-                                        src={barbershop.image}
+                                        src={barbershop.image_url || "/placeholder-barber.jpg"}
                                         alt={barbershop.name}
                                         className={styles.barberImage}
                                     />
@@ -145,7 +141,7 @@ const Dashboard = () => {
                                         <h3>{barbershop.name}</h3>
 
                                         <p className={styles.barberDesc}>
-                                            {barbershop.description}
+                                            {barbershop.address}
                                         </p>
 
                                         <p>

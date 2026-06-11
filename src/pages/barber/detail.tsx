@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import SideBar from "@/components/SideBar/sideBar";
 import { BARBER_DETAIL } from "@/data/mockBarber";
 import styles from "./detail.module.css";
+import { supabaseClient } from "@/lib/supabase";
 
 type Tab = "tentang" | "layanan" | "jadwal" | "review";
 
@@ -20,8 +21,33 @@ export default function DetailBarber() {
   const [favorite, setFavorite] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
   const [toast, setToast] = useState("");
+  const [dbBarber, setDbBarber] = useState<any>(null);
+  const { id } = router.query;
 
-  const barber = BARBER_DETAIL;
+  useEffect(() => {
+    if (!id) return;
+    const fetchBarberDetail = async () => {
+      const { data, error } = await supabaseClient
+        .from('barbershops')
+        .select('*')
+        .eq('id', id)
+        .single();
+        
+      if (data) {
+        setDbBarber(data);
+      }
+    };
+    fetchBarberDetail();
+  }, [id]);
+
+  // Merge data asli dari Supabase dengan data palsu/mock (biar UI ngga rusak)
+  const barber = dbBarber ? {
+    ...BARBER_DETAIL,
+    name: dbBarber.name,
+    image: dbBarber.image_url || BARBER_DETAIL.image,
+    location: dbBarber.address,
+    rating: dbBarber.rating || BARBER_DETAIL.rating,
+  } : BARBER_DETAIL;
 
   const showToast = (msg: string) => {
     setToast(msg);
