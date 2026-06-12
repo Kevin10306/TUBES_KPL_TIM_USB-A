@@ -1,0 +1,115 @@
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: black;
+  overflow: hidden;
+}
+
+.heroActions {
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin-top: auto;
+  margin-bottom: 10vh;
+}
+
+.heroImg {
+  display: none; /* Hero image is currently background */
+}
+
+.imageBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.imageBackground::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+.imageBackground img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btnPrimary, .bgContent {
+  height: 80px;
+  width: 100%;
+  max-width: 280px;
+  padding: 15px 25px;
+  border-radius: var(--radius-md);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.btnPrimary {
+  background-color: var(--accent-gold);
+  border: none;
+  color: #ffffff;
+}
+
+.bgContent {
+  border: 3px solid var(--accent-gold);
+  color: #fefefe;
+}
+
+.btnPrimary:hover, .bgContent:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(245, 200, 66, 0.3);
+}
+
+.btnPrimary:active, .bgContent:active {
+  transform: translateY(2px) scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .heroActions {
+    flex-direction: column;
+    padding: 0 20px;
+    margin-bottom: 5vh;
+  }
+
+  .btnPrimary, .bgContent {
+    max-width: 100%;
+    height: 70px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-height: 600px) {
+  .heroActions {
+    margin-bottom: 20px;
+  }
+  
+  .btnPrimary, .bgContent {
+    height: 60px;
+  }
+}
+
