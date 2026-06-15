@@ -106,8 +106,6 @@ Aplikasi ini dibangun dengan kolaborasi oleh tim:
 - **Jati**
 - **Kevin Ferdinand**
 - **Raihan Dhimas S.N**
-- **Khosy Albuchary**
-- **Azka Shulhan A.**
 
 _(Dibuat dengan semangat Vibe Coder 🔥)_
 >>>>>>> feature/dashboard-jati

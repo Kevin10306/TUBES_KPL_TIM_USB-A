@@ -1,0 +1,506 @@
+.chatContainer {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+.chatLayout {
+  display: flex;
+  flex: 1;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  margin: 20px;
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.contactsSidebar {
+  width: 320px;
+  border-right: 1px solid var(--border-glass);
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.contactsHeader {
+  padding: 20px;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.contactsTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  margin-bottom: 5px;
+}
+
+.contactList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 8px;
+  border: 1px solid transparent;
+}
+
+.contactItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.contactItemActive {
+  background: rgba(245, 200, 66, 0.1);
+  border-color: rgba(245, 200, 66, 0.3);
+}
+
+.contactAvatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-right: 15px;
+}
+
+.contactInfo {
+  flex: 1;
+  overflow: hidden;
+}
+
+.contactName {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contactPreview {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Chat Main Area */
+.chatArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.01);
+}
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.emptyStateIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.chatHeader {
+  padding: 20px;
+  border-bottom: 1px solid var(--border-glass);
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.chatHeaderAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.chatHeaderName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.chatHeaderStatus {
+  font-size: 0.8rem;
+  color: #10b981;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.chatHeaderStatus::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+/* Messages */
+.messageList {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.messageWrapper {
+  display: flex;
+  max-width: 70%;
+}
+
+.messageWrapperSelf {
+  align-self: flex-end;
+}
+
+.messageWrapperOther {
+  align-self: flex-start;
+}
+
+.messageBubble {
+  padding: 12px 18px;
+  border-radius: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.messageBubbleSelf {
+  background: var(--accent-gold);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.messageBubbleOther {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  border-bottom-left-radius: 4px;
+}
+
+.messageTime {
+  font-size: 0.7rem;
+  margin-top: 5px;
+  opacity: 0.7;
+  text-align: right;
+}
+
+/* Input Area */
+.inputArea {
+  padding: 20px;
+  border-top: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.inputForm {
+  display: flex;
+  gap: 10px;
+}
+
+.inputField {
+  flex: 1;
+  padding: 15px 20px;
+  border-radius: 30px;
+  border: 1px solid var(--border-glass);
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--text-primary);
+  outline: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.inputField:focus {
+  border-color: var(--accent-gold);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.sendButton {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent-gold);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.sendButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(245, 200, 66, 0.4);
+}
+
+.sendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Message: deleted state ── */
+.messageBubbleDeleted {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border: 1px dashed var(--border-glass) !important;
+  color: var(--text-secondary) !important;
+  font-style: italic;
+}
+
+.deletedText {
+  font-size: 0.88rem;
+  opacity: 0.7;
+}
+
+/* ── Context Menu (klik kanan) ── */
+.contextMenu {
+  position: fixed;
+  z-index: 9999;
+  background: var(--bg-card, #fff);
+  border: 1px solid var(--border-glass, #e2e8f0);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0,0,0,0.10);
+  padding: 6px;
+  min-width: 210px;
+  animation: contextMenuIn 0.15s ease;
+  backdrop-filter: blur(12px);
+}
+
+@keyframes contextMenuIn {
+  from { opacity: 0; transform: scale(0.92) translateY(-6px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.contextMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: var(--font-main);
+  color: #ef4444;
+  transition: background 0.18s ease, color 0.18s ease;
+  text-align: left;
+}
+
+.contextMenuItem:hover {
+  background: rgba(239, 68, 68, 0.09);
+}
+
+.contextMenuItemSafe {
+  color: var(--accent-gold);
+}
+
+.contextMenuItemSafe:hover {
+  background: rgba(245, 200, 66, 0.1);
+  color: var(--accent-gold);
+}
+
+.contextMenuItemCancel {
+  color: var(--text-secondary, #94a3b8);
+  border-top: 1px solid var(--border-glass, #e2e8f0);
+  margin-top: 4px;
+  padding-top: 12px;
+}
+
+.contextMenuItemCancel:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-secondary, #94a3b8);
+}
+
+.contextMenuIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  stroke: currentColor;
+}
+
+/* ── Pesan: hint klik kanan saat hover ── */
+.messageWrapper {
+  position: relative;
+  cursor: context-menu;
+}
+
+/* ── Tombol Hapus Thread (owner \u2013 muncul saat hover kontakItem) ── */
+.deleteThreadBtn {
+  opacity: 0;
+  pointer-events: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #ef4444;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.deleteThreadBtn svg {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+}
+
+.contactItem:hover .deleteThreadBtn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.deleteThreadBtn:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* ── Modal Konfirmasi ── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modalCard {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 28px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.25s ease;
+  text-align: center;
+  font-family: var(--font-main);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.modalIcon {
+  width: 56px;
+  height: 56px;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  color: #ef4444;
+}
+
+.modalIcon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.modalTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.modalDesc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.modalDesc strong {
+  color: var(--text-primary);
+}
+
+.modalActions {
+  display: flex;
+  gap: 12px;
+}
+
+.modalBtnCancel {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-glass);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modalBtnCancel:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.modalBtnConfirm {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #ef4444;
+  color: #fff;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.modalBtnConfirm:hover {
+  background: #dc2626;
+  transform: scale(1.02);
+}
+
