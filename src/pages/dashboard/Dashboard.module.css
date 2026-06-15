@@ -2,8 +2,7 @@
     max-width: 1400px;
     margin: 0 auto;
     min-height: 100vh;
-    padding: 2.5rem 2rem 3rem 280px;
-    animation: fadeInUp 0.5s ease forwards;
+    padding: 2rem 1.5rem 2rem 280px; /* Ditambah 280px untuk memberi ruang bagi sidebar */
 }
 
 .header {
@@ -65,33 +64,16 @@
 .scheduleItem {
     background: var(--accent-gold);
     color: white;
-    padding: 1rem 1.5rem;
-    border-radius: var(--radius-md);
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1rem;
     min-width: 200px;
     flex: 1 1 300px;
     max-width: 400px;
-    box-shadow: 0 6px 18px rgba(245, 200, 66, 0.25);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.scheduleItem:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgba(245, 200, 66, 0.35);
-}
-
-.emptyState {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    padding: 0.5rem 0;
-}
-
-.errorState {
-    color: var(--accent-orange);
-    font-size: 0.95rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .scheduleItem p:first-child {
@@ -105,6 +87,470 @@
     margin-top: 0.15rem;
 }
 
+/* ── Kartu Pesanan Baru ── */
+.scheduleCard {
+    padding: 16px 18px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1 1 280px;
+    max-width: 400px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.scheduleCard:hover {
+    transform: translateY(-3px);
+}
+
+/* Menunggu — border amber, background lembut */
+.scheduleCardPending {
+    background: #fffbeb;
+    border-color: #f5c842;
+    box-shadow: 0 4px 16px rgba(245, 200, 66, 0.18);
+}
+
+/* Dikonfirmasi — border hijau, background lembut */
+.scheduleCardConfirmed {
+    background: #f0fdf4;
+    border-color: #22c55e;
+    box-shadow: 0 4px 16px rgba(34, 197, 94, 0.12);
+}
+
+.scheduleCardTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.scheduleCardName {
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    margin-bottom: 3px;
+}
+
+.scheduleCardService {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.scheduleCardDate {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    text-align: right;
+}
+
+.scheduleCardBottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Badge Menunggu — amber, berkedip */
+.badgePending {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(245, 200, 66, 0.18);
+    color: #92730a;
+    border: 1px solid #f5c842;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.6; }
+}
+
+/* Badge Dikonfirmasi — hijau */
+.badgeConfirmed {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(34, 197, 94, 0.12);
+    color: #15803d;
+    border: 1px solid #22c55e;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+/* Tombol Konfirmasi */
+.btnKonfirmasi {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-gold);
+    color: white;
+    border: none;
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: var(--font-main);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    box-shadow: 0 3px 10px rgba(245, 200, 66, 0.35);
+}
+
+.btnKonfirmasi:hover {
+    background: #e6b800;
+    transform: scale(1.04);
+    box-shadow: 0 5px 16px rgba(245, 200, 66, 0.45);
+}
+
+.btnKonfirmasi:active {
+    transform: scale(0.97);
+}
+
+/* ── Stat Cards ── */
+.statCard {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.statCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.statIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.statIcon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.statLabel {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.statValue {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.statSub {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* ── Empty Orders State ── */
+.emptyOrders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 32px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-align: center;
+    background: rgba(0,0,0,0.02);
+    border-radius: 16px;
+    border: 1px dashed rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+/* ── History List ── */
+.historyList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.historyItem {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: #f0fdf4;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: 14px;
+    transition: background 0.2s ease;
+}
+
+.historyItem:hover {
+    background: #dcfce7;
+}
+
+.historyCheckIcon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(34, 197, 94, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #15803d;
+}
+
+.historyCheckIcon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.historyName {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.historyService {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+.historyDate {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.historyTotal {
+    font-size: 0.82rem;
+    color: #15803d;
+    font-weight: 600;
+    margin-top: 3px;
+}
+
+/* ── History Search Bar ── */
+.historySearchWrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.historySearchIcon {
+    position: absolute;
+    left: 14px;
+    width: 16px;
+    height: 16px;
+    color: var(--text-secondary);
+    pointer-events: none;
+    flex-shrink: 0;
+}
+
+.historySearchInput {
+    width: 100%;
+    padding: 10px 40px 10px 40px;
+    border-radius: 12px;
+    border: 1.5px solid rgba(0, 0, 0, 0.09);
+    background: white;
+    font-family: var(--font-main);
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.historySearchInput::placeholder {
+    color: var(--text-secondary);
+}
+
+.historySearchInput:focus {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(245, 200, 66, 0.12);
+}
+
+.historySearchClear {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.historySearchClear:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--text-primary);
+}
+
+/* ── Tombol Hapus Jadwal (customer) ── */
+.deleteScheduleBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1.5px solid #ef4444;
+    background: transparent;
+    color: #ef4444;
+    font-family: var(--font-main);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.deleteScheduleBtn svg {
+    width: 13px;
+    height: 13px;
+    stroke: currentColor;
+}
+
+.deleteScheduleBtn:hover {
+    background: #ef4444;
+    color: white;
+    transform: scale(1.03);
+}
+
+/* ── Modal Konfirmasi ── */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeInModal 0.2s ease;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.modalCard {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px 28px;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    animation: slideUpModal 0.25s ease;
+    text-align: center;
+    font-family: var(--font-main);
+}
+
+@keyframes slideUpModal {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+.modalIcon {
+    width: 56px;
+    height: 56px;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    color: #ef4444;
+}
+
+.modalIcon svg {
+    width: 26px;
+    height: 26px;
+}
+
+.modalTitle {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.modalDesc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.modalDesc strong {
+    color: var(--text-primary);
+}
+
+.modalActions {
+    display: flex;
+    gap: 12px;
+}
+
+.modalBtnCancel {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.modalBtnCancel:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.modalBtnConfirm {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    background: #ef4444;
+    color: #fff;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.modalBtnConfirm:hover {
+    background: #dc2626;
+    transform: scale(1.02);
+}
+
+
+
+
+
+
 .barberList {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -114,15 +560,13 @@
 
 .barberCard {
     background: white;
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
+    border-radius: 20px;
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
     border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: fadeInUp 0.5s ease forwards;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .barberCard:hover {
@@ -182,4 +626,4 @@
     .scheduleItem {
         flex: 1 1 100%;
     }
-}
+}
