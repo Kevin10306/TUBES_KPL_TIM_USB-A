@@ -16,13 +16,14 @@
 .logo {
     font-size: 1.75rem;
     font-weight: 800;
-    /* color: var(--accent-gold); */
     margin-bottom: 3.5rem;
     padding: 0 0.5rem;
     letter-spacing: -0.5px;
     font-family: 'Outfit', sans-serif;
     color: #fefefe;
     cursor: pointer;
+    text-decoration: none;
+    display: block;
 }
 
 
@@ -44,6 +45,10 @@
     display: flex;
     align-items: center;
     border: 1px solid transparent;
+    width: 100%;
+    background: none;
+    font-family: inherit;
+    text-decoration: none;
 }
 
 .menuItem:hover {
